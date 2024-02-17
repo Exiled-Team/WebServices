@@ -73,3 +73,7 @@ _[Ss]cripts
 *.nupkg
 *.ncrunchsolution
 *.dot[Cc]over
+.idea/.idea.ExiledWebServices/.idea/.name
+.idea/.idea.ExiledWebServices/.idea/encodings.xml
+.idea/.idea.ExiledWebServices/.idea/indexLayout.xml
+.idea/.idea.ExiledWebServices/.idea/vcs.xml
