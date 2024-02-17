@@ -1,19 +1,5 @@
-﻿@page "/Documentation/{Name}"
+﻿@page "/{Name}"
 @layout MainLayout
-@using System.Reflection.Metadata
-@using System.Runtime.CompilerServices
-@using System.Web
-@using ExiledWebServices.Components.Core
-@using ExiledWebServices.Components.Layout
-@using ExiledWebServices.Components.Core
-@using Microsoft.AspNetCore.Html
-@using Microsoft.AspNetCore.Mvc.ViewFeatures
-@using Microsoft.AspNetCore.Mvc.RazorPages;
-@using Microsoft.AspNetCore.Mvc.Rendering
-@using MudBlazor
-@using Button = ExiledWebServices.Components.Core.Button
-@using Page = Microsoft.AspNetCore.Mvc.RazorPages.Page
-@using ExiledWebServices.Components.Core
 @using ExiledWebServices.Components.Core
 @using ExiledWebServices.Components.Layout
 @using ExiledWebServices.Deployment
@@ -21,12 +7,15 @@
 @code {
     [Parameter]
     public string Name { get; set; }
-
-    private IArticlesConfig<DocumentationCard> Config { get; set; }
-
+    
+    public IArticlesConfig<DocumentationCard> Config { get; set; }
+    
+    
+    public List<DocumentationCard> Categories => Config.Articles;
+    
     protected override void OnInitialized()
     {
-        Config = Loader.LoadedConfigs.FirstOrDefault(c => c is IArticlesConfig<DocumentationCard> cfg && cfg.TargetPage == Name) as IArticlesConfig<DocumentationCard>;
+        Config = Loader.GetConfig<IConfig>(Name) as IArticlesConfig<DocumentationCard>;
     }
 }
 
@@ -52,10 +41,13 @@
         </p>
 
         <div class="docs-flex">
+            @{
+                string prefix = Config.IsCategory ? "/" : "/Article/";
+            }
             @foreach (DocumentationCard card in Categories)
             {
                 int id = card.GetHashCode();
-                string href = string.IsNullOrEmpty(@card.Href) ? $"/Article/{@card.Name}" : $"/Article/{@card.Href}";
+                string href = string.IsNullOrEmpty(@card.Href) ? prefix + card.Name : prefix + card.Href;
                 <div class="card docs-card extended" data-arrow="@id">
 
                     <div class="card-content">
@@ -116,9 +108,3 @@
 </section>
 
 </body>
-
-@code {
-    private List<DocumentationCard> categories;
-
-    public List<DocumentationCard> Categories => categories ??= Config.Articles;
-}
