@@ -1,5 +1,3 @@
-using YamlDotNet.Serialization;
-
 namespace ExiledWebServices.Deployment;
 
 /// <summary>

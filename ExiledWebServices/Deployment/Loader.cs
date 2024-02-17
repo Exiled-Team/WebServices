@@ -1,9 +1,4 @@
 using System.Reflection;
-using System.Xml.Schema;
-using ExiledWebServices.Components.Configs;
-using ExiledWebServices.Components.Core;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Extensions.Options;
 using YamlDotNet.Serialization;
 
 namespace ExiledWebServices.Deployment;
@@ -53,16 +48,13 @@ public class Loader
     /// <returns>The configuration object of type <typeparamref name="T"/>.</returns>
     public static T GetConfig<T>(string targetPage = "")
         where T : IConfig => (T)LoadedConfigs.FirstOrDefault(c =>
-        c is T cfg && cfg.IsEnabled && c.GetType() == typeof(T) && cfg.TargetPage.Equals(targetPage, StringComparison.CurrentCultureIgnoreCase));
+        c is T { IsEnabled: true } cfg && cfg.TargetPage.Equals(targetPage, StringComparison.CurrentCultureIgnoreCase));
 
     /// <summary>
     /// Loads all configurations.
     /// </summary>
     public static void LoadConfigs()
     {
-        List<object> csf = LoadedConfigs;
-        Console.WriteLine(LoadedConfigs);
-
         Directory.CreateDirectory(Paths.Configs);
 
         foreach (Type type in Assembly.GetExecutingAssembly().GetTypes())

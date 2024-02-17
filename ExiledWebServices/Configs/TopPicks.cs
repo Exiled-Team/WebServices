@@ -1,7 +1,5 @@
 using ExiledWebServices.Components.Core;
 using ExiledWebServices.Deployment;
-using YamlDotNet.RepresentationModel;
-using YamlDotNet.Serialization;
 
 namespace ExiledWebServices.Components.Configs;
 

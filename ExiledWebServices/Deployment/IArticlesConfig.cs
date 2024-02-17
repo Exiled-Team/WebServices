@@ -1,5 +1,3 @@
-using YamlDotNet.Serialization;
-
 namespace ExiledWebServices.Deployment;
 
 /// <summary>
@@ -27,6 +25,11 @@ public interface IArticlesConfig<T> : IConfig
     /// </summary>
     string TargetPage { get; set; }
 
+    /// <summary>
+    /// Gets or sets a value indicating whether the page is a category.
+    /// </summary>
+    bool IsCategory { get; set; }
+    
     /// <summary>
     /// Gets or sets the title span.
     /// </summary>

@@ -1,7 +1,4 @@
 using ExiledWebServices.Components.Core.Interfaces;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using ExiledWebServices.Deployment;
 
 namespace ExiledWebServices.Components.Core
