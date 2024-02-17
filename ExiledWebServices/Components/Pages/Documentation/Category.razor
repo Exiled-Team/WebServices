@@ -1,4 +1,4 @@
-﻿@page "/Documentation/GettingStarted"
+﻿@page "/Documentation/{Name}"
 @layout MainLayout
 @using System.Reflection.Metadata
 @using System.Runtime.CompilerServices
@@ -18,6 +18,18 @@
 @using ExiledWebServices.Components.Layout
 @using ExiledWebServices.Deployment
 
+@code {
+    [Parameter]
+    public string Name { get; set; }
+
+    private IArticlesConfig<DocumentationCard> Config { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Config = Loader.LoadedConfigs.FirstOrDefault(c => c is IArticlesConfig<DocumentationCard> cfg && cfg.TargetPage == Name) as IArticlesConfig<DocumentationCard>;
+    }
+}
+
 <AdditiveHead Title="Exiled" Description="Exiled Framework">
     <ChildContent>
         <link rel="stylesheet" href="assets/css/docs.css"/>
@@ -32,11 +44,11 @@
     <div class="container">
 
         <h2 class="headline headline-2 section-title">
-            <span class="span">Getting</span> Started
+            <span class="span">@Config.TitleSpan</span> @Config.Title
         </h2>
 
         <p class="section-text">
-            Begin your Exiled journey: Immerse yourself in the world of Modding and Plugin Development to uncover limitless opportunities for creativity and innovation!
+            @Config.Subtitle
         </p>
 
         <div class="docs-flex">
@@ -108,5 +120,5 @@
 @code {
     private List<DocumentationCard> categories;
 
-    public List<DocumentationCard> Categories => categories ??= Loader.GetConfig<Configs.GettingStarted>().Articles;
+    public List<DocumentationCard> Categories => categories ??= Config.Articles;
 }

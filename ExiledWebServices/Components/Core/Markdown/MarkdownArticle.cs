@@ -246,7 +246,7 @@ public partial class MarkdownArticle
 
     [GeneratedRegex(@"\[title:\s*(.*?)\]")]
     private static partial Regex TitleRegex();
-    
+
     [GeneratedRegex(@"\[preview:\s*(.*?)\]")]
     private static partial Regex PreviewRegex();
 
