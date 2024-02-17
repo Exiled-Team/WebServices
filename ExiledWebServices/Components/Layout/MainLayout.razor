@@ -1,0 +1,19 @@
+﻿@inherits LayoutComponentBase
+@using ExiledWebServices.Components.Pages
+@using ExiledWebServices.Components.Pages.Elements
+@layout DefaultLayout
+
+<AdditiveHead Title="@Title" Description="@Description" />
+<body id="top">
+@Body
+
+<!-- #BACK TO TOP-->
+<BackTopButton Href="#top"/>
+
+</body>
+
+@code {
+    private string Title { get; set; }
+
+    private string Description { get; set; }
+}

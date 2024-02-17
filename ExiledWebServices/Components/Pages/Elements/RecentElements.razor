@@ -1,0 +1,86 @@
+@namespace ExiledWebServices.Components.Pages.Elements
+
+@using ExiledWebServices.Components.Core
+@using ExiledWebServices.Components.Core.Interfaces
+@using MudBlazor
+
+<section class="section recent-post" id="recent" aria-labelledby="recent-label">
+    <div class="container">
+
+        <div class="post-main">
+
+            <h2 class="headline headline-2 section-title">
+                <span class="span">@Title</span>
+            </h2>
+
+            <p class="section-text">
+                @Subtitle
+            </p>
+
+            <ul class="grid-list">
+
+                @for (int i = 0; i < RecentItems.Items.Count; i++)
+                {
+                    if (i >= RecentItems.MaxDisplayableItems)
+                        break;
+
+                    CoverElement elem = RecentItems.Items[i];
+
+                    <li>
+                        <div class="recent-post-card">
+                            @if (elem.Image is not null)
+                            {
+                                <figure class="card-banner img-holder" style="--width: @elem.Image.Width; --height: @elem.Image.Height;">
+                                    <Image src=@elem.Image.Src width="@elem.Image.Width" height="@elem.Image.Height" loading="lazy" class="img-cover"/>
+                                </figure>
+                            }
+
+                            <div class="card-content">
+
+                                <a href="@elem.Tag.Href" class="card-badge">@elem.Tag.Title</a>
+
+                                <h3 class="headline headline-3 card-title">
+                                    <a href="@elem.Href" class="link hover-2">@elem.Title</a>
+                                </h3>
+
+                                <p class="card-text">
+                                    @elem.Subtitle
+                                </p>
+
+                                <div class="card-wrapper">
+
+                                    <div class="wrapper">
+                                        <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+
+                                        <span class="span">@elem.NotifyReading</span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </li>
+                }
+
+            </ul>
+
+        </div>
+
+        @InjectedCode
+
+    </div>
+</section>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public string Subtitle { get; set; }
+
+    [Parameter]
+    public ListService<CoverElement> RecentItems { get; set; }
+
+    [Parameter]
+    public RenderFragment InjectedCode { get; set; }
+}

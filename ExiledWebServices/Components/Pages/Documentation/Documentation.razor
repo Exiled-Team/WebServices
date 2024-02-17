@@ -1,0 +1,116 @@
+﻿@page "/Documentation"
+@layout MainLayout
+@using System.Reflection.Metadata
+@using System.Runtime.CompilerServices
+@using System.Web
+@using ExiledWebServices.Components.Core
+@using ExiledWebServices.Components.Layout
+@using ExiledWebServices.Components.Core
+@using ExiledWebServices.Deployment
+@using Microsoft.AspNetCore.Html
+@using Microsoft.AspNetCore.Mvc.ViewFeatures
+@using Microsoft.AspNetCore.Mvc.RazorPages;
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using MudBlazor
+@using Button = ExiledWebServices.Components.Core.Button
+@using Page = Microsoft.AspNetCore.Mvc.RazorPages.Page
+
+<AdditiveHead Title="Exiled" Description="Exiled Framework">
+    <ChildContent>
+        <link rel="stylesheet" href="assets/css/docs.css"/>
+    </ChildContent>
+</AdditiveHead>
+
+<body>
+
+<div style="height: 15vh"></div>
+
+<section class="section docs" aria-label="docs">
+    <div class="container">
+
+        <h2 class="headline headline-2 section-title">
+            <span class="span">Exiled</span> Docs
+        </h2>
+
+        <p class="section-text">
+            Discover the wonders of the Exiled Framework with our comprehensive guides!
+        </p>
+
+        <ul class="docs-list">
+
+            @foreach (DocumentationCard card in Categories)
+            {
+                <li>
+                    @{
+                        int id = @card.GetHashCode();
+                    }
+                    <div class="card docs-card" data-arrow="@id">
+
+                        <div class="card-content">
+
+                            <div class="card-wrapper">
+                                <div class="card-tag">
+                                    @if (@card.Tags is not null)
+                                    {
+                                        @foreach (SerializableIcon tag in @card.Tags)
+                                        {
+                                            if (string.IsNullOrEmpty(tag.Class))
+                                                continue;
+
+                                            string hashedName = tag.Class[0] == '#' ? tag.Class : $"#{tag.Class}";
+
+                                            <a href="@tag.Href" class="span hover-2">@hashedName</a>
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <h3 class="headline headline-3">
+                                <a href="@card.Href" class="card-title hover-2 icon-label">
+                                    @if (!string.IsNullOrEmpty(@card.Icon.Class))
+                                    {
+                                        <ion-icon name="@card.Icon.Class"></ion-icon>
+                                    }
+
+                                    <span>@card.Title.EncodedText</span>
+                                </a>
+                            </h3>
+
+                            <p class="card-subtitle">@card.Subtitle.EncodedText</p>
+
+                            <div class="card-wrapper">
+                                <a href="@card.Href" class="card-btn icon-label">
+                                    <span class="span">Browse docs</span>
+                                    <ion-icon name="arrow-forward-outline" class="arrow-ptr arrow-ptr-right" data-arrow-id="@id"></ion-icon>
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </li>
+            }
+
+        </ul>
+
+    </div>
+
+    <img src="./assets/images/background/shadow-3.svg" width="500" height="1500" loading="lazy" alt="" class="docs-bg">
+    <img src="./assets/images/background/shadow-2.svg" width="500" height="1500" loading="lazy" alt="" class="docs-bg">
+
+</section>
+
+<br/>
+
+<section>
+
+</section>
+
+</body>
+
+@code {
+    private List<DocumentationCard> categories;
+
+    public List<DocumentationCard> Categories => categories ??= Loader.GetConfig<Configs.Documentation>().Articles;
+}
