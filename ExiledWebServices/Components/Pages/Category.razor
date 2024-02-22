@@ -19,7 +19,9 @@
     }
 }
 
-<AdditiveHead Title="Exiled" Description="Exiled Framework">
+@if (Config is not null)
+{
+    <AdditiveHead Title="Exiled" Description="Exiled Framework">
     <ChildContent>
         <link rel="stylesheet" href="assets/css/docs.css"/>
     </ChildContent>
@@ -108,3 +110,4 @@
 </section>
 
 </body>
+}

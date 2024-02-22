@@ -5,77 +5,140 @@
 @using ExiledWebServices.Components.Pages.Elements
 @using ExiledWebServices.Deployment
 
+<AdditiveHead Title="Exiled" Description="Exiled Framework">
+    <ChildContent>
+        <link rel="stylesheet" href="assets/css/docs.css"/>
+    </ChildContent>
+</AdditiveHead>
+
 <body>
 
 <main>
 
-<article>
+    <article>
 
-<!--#HERO-->
-<section class="hero" id="home" aria-label="home">
-    <div class="container">
-        <div class="hero-content">
+        <!--#HERO-->
+        <section class="hero" id="home" aria-label="home">
+            <div class="container">
+                <div class="hero-content">
 
-            <p class="hero-subtitle"></p>
+                    <p class="hero-subtitle"></p>
 
-            <h1 class="headline headline-1 section-title">
-                <span class="span">EXILED</span><br/>Framework
-            </h1>
+                    <h1 class="headline headline-1 section-title">
+                        <span class="span">EXILED</span><br/>Framework
+                    </h1>
 
-            <p class="hero-text">
-                EXILED is a plugin framework for SCP: Secret Laboratory servers.
-                It offers an event system for developers to hook into in order to manipulate or change game code or implement their own functions.
-            </p>
+                    <p class="hero-text">
+                        EXILED is a plugin framework for SCP: Secret Laboratory servers.
+                        It offers an event system for developers to hook into in order to manipulate or change game code or implement their own functions.
+                    </p>
 
-        </div>
+                </div>
 
-        <div class="hero-banner">
-            <img src="./assets/images/logo-variants/logo.png" style="margin-left: 10%" width="80%" alt="Exiled Logo" class="bouncingShape shadowFilter">
-            <img src="./assets/images/patterns/pattern-1.svg" width="27" height="26" alt="shape" class="shape shape-1">
-            <img src="./assets/images/patterns/pattern-1.svg" width="27" height="26" alt="shape" class="shape shape-2">
-        </div>
+                <div class="hero-banner">
+                    <img src="./assets/images/logo-variants/logo.png" style="margin-left: 10%" width="80%" alt="Exiled Logo" class="bouncingShape shadowFilter">
+                    <img src="./assets/images/patterns/pattern-1.svg" width="27" height="26" alt="shape" class="shape shape-1">
+                    <img src="./assets/images/patterns/pattern-1.svg" width="27" height="26" alt="shape" class="shape shape-2">
+                </div>
 
-        <div class="gradient hero-bg hero-bg-3"></div>
-        <div class="gradient hero-bg hero-bg-1"></div>
+                <div class="gradient hero-bg hero-bg-3"></div>
+                <div class="gradient hero-bg hero-bg-1"></div>
 
-    </div>
-</section>
+            </div>
+        </section>
 
-<br/>
+        <br/>
 
-<!--#TOP PICKS-->
-<ElementSlider Title="Recommended Plugins" Subtitle="Discover the top-rated plugins favored by the entire Exiled community." Elements="TopPicks"></ElementSlider>
+        <!--#TOP PICKS-->
+        <ElementSlider Title="Recommended Plugins" Subtitle="Discover the top-rated plugins favored by the entire Exiled community." Elements="TopPicks"></ElementSlider>
 
-<br/>
+        <br/>
 
-<section class="section">
-    <div class="container" style="margin-bottom: 5vh">
-        <div class="gradient hero-bg bg-3"></div>
+        <section class="section">
+            <div class="container" style="margin-bottom: 5vh">
+                <div class="gradient hero-bg bg-3"></div>
 
-        <h2 class="headline headline-2">
-            Reliability
-        </h2>
+                <h2 class="headline headline-2" style="text-align: center; margin-bottom: 80px">
+                    Entirely Community-driven
+                </h2>
 
-        <p>
-            All EXILED events are implemented using Harmony, eliminating the need for direct modification of server assemblies.
-            <br/>
-            This approach offers two significant advantages:
-        </p>
+                <div class="docs-flex">
+                    <div class="card docs-card illustrator">
 
-        <ul class="md-ul">
-            <li class="md-li">
-                Firstly, the entire framework's code can be openly shared and studied, fostering a community-driven environment where developers can understand its inner workings and contribute suggestions for improvements or new features.
-            </li>
-            <li class="md-li">
-                Secondly, because the framework's code is separate from the server assembly, minor game updates are unlikely to impact its functionality.
-                This not only ensures compatibility with future game updates but also simplifies the process of updating the framework when necessary.
-            </li>
-        </ul>
-    </div>
+                        <div class="card-content" style="text-align: center">
 
-</section>
+                            <a class="card-title hover-2 icon-label" style="justify-content: center; margin-bottom: 8px">
+                                <ion-icon name="git-branch" size="large"></ion-icon>
+                            </a>
 
-</article>
+                            <h3 class="headline headline-3">Support</h3>
+
+                            <p class="card-subtitle" style="font-size: 1.7rem">We consistently deliver updates and releases to address bugs and introduce new features or contributions swiftly.</p>
+
+                        </div>
+
+                    </div>
+                    <div class="card docs-card illustrator">
+
+                        <div class="card-content" style="text-align: center">
+
+                            <a class="card-title hover-2 icon-label" style="justify-content: center; margin-bottom: 8px">
+                                <ion-icon name="people" size="large"></ion-icon>
+                            </a>
+
+
+                            <h3 class="headline headline-3">Community</h3>
+
+                            <p class="card-subtitle" style="font-size: 1.7rem">We encourage developers to contribute actively rather than solely relying on Exiled, thereby boosting project activity.</p>
+
+                        </div>
+
+                    </div>
+                    <div class="card docs-card illustrator">
+
+                        <div class="card-content" style="text-align: center">
+
+                            <a class="card-title hover-2 icon-label" style="justify-content: center; margin-bottom: 8px">
+                                <ion-icon name="toggle" size="large"></ion-icon>
+                            </a>
+
+                            <h3 class="headline headline-3">Features</h3>
+
+                            <p class="card-subtitle" style="font-size: 1.7rem">We offer diverse features, providing users with flexibility. These features are optional, catering to various needs.</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div style="height: 10vh"></div>
+
+                <h2 class="headline headline-2">
+                    Reliability
+                </h2>
+
+                <p>
+                    All EXILED events are implemented using Harmony, eliminating the need for direct modification of server assemblies.
+                    <br/>
+                    This approach offers two significant advantages:
+                </p>
+
+                <ul class="md-ul">
+                    <li class="md-li">
+                        Firstly, the entire framework's code can be openly shared and studied, fostering a community-driven environment where developers can understand its inner workings and contribute suggestions for improvements or new features.
+                    </li>
+                    <li class="md-li">
+                        Secondly, because the framework's code is separate from the server assembly, minor game updates are unlikely to impact its functionality.
+                        This not only ensures compatibility with future game updates but also simplifies the process of updating the framework when necessary.
+                    </li>
+                </ul>
+                
+            </div>
+
+        </section>
+
+    </article>
 
 </main>
 
