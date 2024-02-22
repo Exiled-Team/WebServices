@@ -26,16 +26,16 @@ public class Documentation : IArticlesConfig<DocumentationCard>
 
     /// <inheritdoc />
     public bool IsCategory { get; set; } = true;
-    
+
     /// <inheritdoc />
     public string TitleSpan { get; set; } = "Exiled";
-    
+
     /// <inheritdoc />
     public string Title { get; set; } = "Documentation";
 
     /// <inheritdoc />
     public string Subtitle { get; set; } = "Discover the wonders of the Exiled Framework with our comprehensive guides!";
-    
+
     /// <inheritdoc />
     public List<DocumentationCard> Articles { get; set; } = new();
 }

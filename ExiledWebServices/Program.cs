@@ -1,12 +1,13 @@
 using ExiledWebServices.Components;
 using ExiledWebServices.Deployment;
+using ExiledWebServices.Deployment.Services;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-Loader.LoadConfigs();
+builder.Services.AddSingleton<IConfigLoaderService, ConfigLoaderService>();
 
 WebApplication app = builder.Build();
 

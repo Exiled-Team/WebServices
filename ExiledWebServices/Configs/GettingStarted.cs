@@ -23,7 +23,7 @@ public class GettingStarted : IArticlesConfig<DocumentationCard>
 
     /// <inheritdoc />
     public bool IsCategory { get; set; } = false;
-    
+
     /// <inheritdoc />
     public string TargetPage { get; set; } = "GettingStarted";
 

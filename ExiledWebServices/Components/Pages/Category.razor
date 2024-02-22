@@ -3,19 +3,22 @@
 @using ExiledWebServices.Components.Core
 @using ExiledWebServices.Components.Layout
 @using ExiledWebServices.Deployment
+@using ExiledWebServices.Deployment.Services
+@inject IConfigLoaderService ConfigLoader
 
 @code {
     [Parameter]
     public string Name { get; set; }
-    
+
     public IArticlesConfig<DocumentationCard> Config { get; set; }
-    
-    
+
+
     public List<DocumentationCard> Categories => Config.Articles;
-    
+
     protected override void OnInitialized()
     {
-        Config = Loader.GetConfig<IConfig>(Name) as IArticlesConfig<DocumentationCard>;
+        ConfigLoader.LoadConfigs(Name);
+        Config = ConfigLoader.GetConfig<IConfig>(Name) as IArticlesConfig<DocumentationCard>;
     }
 }
 
@@ -26,7 +29,7 @@
         <link rel="stylesheet" href="assets/css/docs.css"/>
     </ChildContent>
 </AdditiveHead>
-
+    
 <body>
 
 <div style="height: 15vh"></div>

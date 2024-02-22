@@ -29,7 +29,7 @@ public interface IArticlesConfig<T> : IConfig
     /// Gets or sets a value indicating whether the page is a category.
     /// </summary>
     bool IsCategory { get; set; }
-    
+
     /// <summary>
     /// Gets or sets the title span.
     /// </summary>

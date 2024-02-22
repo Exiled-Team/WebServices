@@ -3,13 +3,18 @@
 @using ExiledWebServices.Components.Core
 @using ExiledWebServices.Components.Layout
 @using ExiledWebServices.Components.Pages.Elements
-@using ExiledWebServices.Deployment
+@using ExiledWebServices.Deployment.Services
+@inject IConfigLoaderService ConfigLoader
 
 <AdditiveHead Title="Exiled" Description="Exiled Framework">
     <ChildContent>
         <link rel="stylesheet" href="assets/css/docs.css"/>
     </ChildContent>
 </AdditiveHead>
+
+@{
+    ConfigLoader.LoadConfigs(nameof(Home));
+}
 
 <body>
 
@@ -145,7 +150,7 @@
 </body>
 
 @code {
-    private ListService<CoverCard> topPicks;
+    private ListService<CoverCard>? topPicks;
 
-    ListService<CoverCard> TopPicks => topPicks ??= Loader.GetConfig<Configs.TopPicks>().Elements;
+    ListService<CoverCard> TopPicks => topPicks ??= ConfigLoader.GetConfig<Configs.TopPicks>().Elements;
 }

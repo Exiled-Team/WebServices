@@ -2,13 +2,18 @@
 @layout MainLayout
 @using ExiledWebServices.Components.Core
 @using ExiledWebServices.Components.Layout
-@using ExiledWebServices.Deployment
+@using ExiledWebServices.Deployment.Services
+@inject IConfigLoaderService ConfigLoader
 
 <AdditiveHead Title="Exiled" Description="Exiled Framework">
     <ChildContent>
         <link rel="stylesheet" href="assets/css/docs.css"/>
     </ChildContent>
 </AdditiveHead>
+
+@{
+    ConfigLoader.LoadConfigs("Blog");
+}
 
 <body>
 
@@ -72,9 +77,9 @@
 </body>
 
 @code {
-    private IEnumerable<MarkdownArticle> articles;
+    private IEnumerable<MarkdownArticle>? articles;
 
     public IEnumerable<MarkdownArticle> Articles => articles ??= ArticleService.Instance.Articles.Where(article => article.CanBeDisplayed).ToList();
 
-    public Configs.Blog Config => Loader.GetConfig<Configs.Blog>();
+    public Configs.Blog Config => ConfigLoader.GetConfig<Configs.Blog>();
 }

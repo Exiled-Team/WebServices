@@ -1,4 +1,5 @@
 using System.Reflection;
+using ExiledWebServices.Deployment.Services;
 using YamlDotNet.Serialization;
 
 namespace ExiledWebServices.Deployment;
@@ -6,7 +7,7 @@ namespace ExiledWebServices.Deployment;
 /// <summary>
 /// Class for loading configurations.
 /// </summary>
-public class Loader
+public class ConfigLoaderService : IConfigLoaderService
 {
     /// <summary>
     /// Gets the serializer for writing YAML data.
@@ -18,42 +19,25 @@ public class Loader
     /// </summary>
     public static IDeserializer Deserializer => YamlSerializer.ServiceDeserializer;
 
-    /// <summary>
-    /// Gets a set of loaded configurations.
-    /// </summary>
-    public static List<object> LoadedConfigs { get; } = new();
+    /// <inheritdoc cref=""/>
+    public List<object> LoadedConfigs { get; } = new();
 
-    /// <summary>
-    /// Gets the configuration object for the specified target page.
-    /// </summary>
-    /// <param name="targetPage">The target page.</param>
-    /// <returns>The configuration object.</returns>
-    public static object GetConfig(string targetPage) => LoadedConfigs.FirstOrDefault(c =>
+    /// <inheritdoc cref=""/>
+    public object GetConfig(string targetPage) => LoadedConfigs.FirstOrDefault(c =>
         c is IConfig cfg && cfg.TargetPage.Equals(targetPage, StringComparison.CurrentCultureIgnoreCase));
 
-    /// <summary>
-    /// Gets the configuration object of type <typeparamref name="T"/> for the specified target page.
-    /// </summary>
-    /// <typeparam name="T">The type of the configuration object.</typeparam>
-    /// <returns>The configuration object of type <typeparamref name="T"/>.</returns>
-    public static T GetConfig<T>()
+    /// <inheritdoc cref=""/>
+    public T GetConfig<T>()
         where T : IConfig => (T)LoadedConfigs.FirstOrDefault(c =>
         c is T cfg && cfg.IsEnabled && c.GetType() == typeof(T));
 
-    /// <summary>
-    /// Gets the configuration object of type <typeparamref name="T"/> for the specified target page.
-    /// </summary>
-    /// <typeparam name="T">The type of the configuration object.</typeparam>
-    /// <param name="targetPage">The target page.</param>
-    /// <returns>The configuration object of type <typeparamref name="T"/>.</returns>
-    public static T GetConfig<T>(string targetPage = "")
+    /// <inheritdoc cref=""/>
+    public T GetConfig<T>(string targetPage = "")
         where T : IConfig => (T)LoadedConfigs.FirstOrDefault(c =>
         c is T { IsEnabled: true } cfg && cfg.TargetPage.Equals(targetPage, StringComparison.CurrentCultureIgnoreCase));
 
-    /// <summary>
-    /// Loads all configurations.
-    /// </summary>
-    public static void LoadConfigs()
+    /// <inheritdoc cref=""/>
+    public void LoadConfigs(string targetPage = "")
     {
         Directory.CreateDirectory(Paths.Configs);
 
@@ -64,7 +48,8 @@ public class Loader
 
             object @object = Activator.CreateInstance(type);
 
-            if (@object is not IConfig config || LoadedConfigs.Any(val => val is IConfig cfg && Paths.GetConfigPath(cfg) == Paths.GetConfigPath(config)))
+            if (@object is not IConfig config || (!string.IsNullOrEmpty(targetPage) && config.TargetPage != targetPage) ||
+                LoadedConfigs.Any(val => val is IConfig cfg && Paths.GetConfigPath(cfg) == Paths.GetConfigPath(config)))
                 continue;
 
             if (File.Exists(Paths.GetConfigPath(config)))

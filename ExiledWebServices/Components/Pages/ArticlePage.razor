@@ -3,7 +3,9 @@
 @using ExiledWebServices.Components.Core
 @using ExiledWebServices.Components.Layout
 @using ExiledWebServices.Components.Pages.Elements
+@using ExiledWebServices.Deployment.Services
 @using Markdig
+@inject IConfigLoaderService ConfigLoader
 
 @code {
     [Parameter]
@@ -26,6 +28,10 @@
         <title></title>
     </ChildContent>
 </AdditiveHead>
+
+@{
+    ConfigLoader.LoadConfigs(Name);
+}
 
 <body>
 <div style="height: 15vh"></div>
