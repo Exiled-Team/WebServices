@@ -1,0 +1,104 @@
+is_enabled: true
+identifier: TopPicks
+directory: Home
+target_page: Home
+elements:
+  items:
+  - name: Discord Integration
+    href: '#'
+    image:
+      name: 
+      href: 
+      src: ./assets/images/background/default-plugin-bg.png
+      alt: Discord Integration
+      height: 
+      width: 
+    content:
+      title:
+        text: Discord Integration
+        tags: []
+      subtitle:
+        text: '@Exiled-Team'
+        tags: []
+  - name: CedMod
+    href: '#'
+    image:
+      name: 
+      href: 
+      src: ./assets/images/background/default-plugin-bg.png
+      alt: CedMod
+      height: 
+      width: 
+    content:
+      title:
+        text: CedMod
+        tags: []
+      subtitle:
+        text: '@ced777ric'
+        tags: []
+  - name: Scripted Events
+    href: '#'
+    image:
+      name: 
+      href: 
+      src: ./assets/images/background/default-plugin-bg.png
+      alt: Scripted Events
+      height: 
+      width: 
+    content:
+      title:
+        text: Scripted Events
+        tags: []
+      subtitle:
+        text: '@thunder300'
+        tags: []
+  - name: Admin Tools
+    href: '#'
+    image:
+      name: 
+      href: 
+      src: ./assets/images/background/default-plugin-bg.png
+      alt: Admin Tools
+      height: 
+      width: 
+    content:
+      title:
+        text: Admin Tools
+        tags: []
+      subtitle:
+        text: '@Exiled-Team'
+        tags: []
+  - name: Map Editor Reborn
+    href: '#'
+    image:
+      name: 
+      href: 
+      src: ./assets/images/background/default-plugin-bg.png
+      alt: Map Editor Reborn
+      height: 
+      width: 
+    content:
+      title:
+        text: Map Editor Reborn
+        tags: []
+      subtitle:
+        text: '@michal78900'
+        tags: []
+  - name: Common Utilities
+    href: '#'
+    image:
+      name: 
+      href: 
+      src: ./assets/images/background/default-plugin-bg.png
+      alt: Common Utilities
+      height: 
+      width: 
+    content:
+      title:
+        text: Common Utilities
+        tags: []
+      subtitle:
+        text: '@Exiled-Team'
+        tags: []
+  max_displayable_items: 10
+  name: 
