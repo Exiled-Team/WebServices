@@ -1,0 +1,11 @@
+﻿@using WebApp.Shared.Layouts
+<Router AppAssembly="typeof(Program).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="routeData" DefaultLayout="@typeof(DefaultLayout)" />
+        <FocusOnNavigate RouteData="routeData" Selector="h1"/>
+    </Found>
+    <NotFound>
+        <PageTitle>Error</PageTitle>
+        <LayoutView Layout="@typeof(EmptyLayout)"></LayoutView>
+    </NotFound>
+</Router>

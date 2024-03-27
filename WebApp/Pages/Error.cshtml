@@ -1,0 +1,76 @@
+@page
+@model WebApp.Pages.ErrorModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="favicon.png"/>
+    <link rel="shortcut icon" href="./assets/images/logo-variants/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/atom-one-dark.css"/>
+    <link rel="stylesheet" href="assets/css/atom-one-dark.min.css"/>
+    <link rel="stylesheet" href="./assets/css/properties.css">
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/header.css">
+    <link rel="stylesheet" href="./assets/css/footer.css">
+    <link rel="stylesheet" href="./assets/css/hero.css">
+</head>
+
+<body>
+
+<main>
+
+    <article>
+
+        <!--#HERO-->
+        <section class="hero" id="home" aria-label="home">
+            <div class="container">
+                <div class="hero-content">
+
+                    <p class="hero-subtitle"></p>
+
+                    <h1 class="headline headline-1 section-title">
+                        <span class="span">An Error</span><br/>Occurred
+                    </h1>
+
+                    <p class="hero-text">
+                        Oops! Looks like we hit a snag trying to reach the page you're after. Double-check to ensure the page actually exists.
+                    </p>
+
+                    <a href="/" class="btn btn-primary">
+                        <span class="span">Return to Home</span>
+
+                        <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
+                    </a>
+                    
+                </div>
+
+                <div class="hero-banner">
+                    <img src="./assets/images/logo-variants/logo.png" style="margin-left: 10%" width="80%" alt="Exiled Logo" class="bouncingShape shadowFilter">
+                    <img src="./assets/images/patterns/pattern-1.svg" width="27" height="26" alt="shape" class="shape shape-1">
+                    <img src="./assets/images/patterns/pattern-1.svg" width="27" height="26" alt="shape" class="shape shape-2">
+                </div>
+
+                <div class="gradient hero-bg hero-bg-3"></div>
+                <div class="gradient hero-bg hero-bg-1"></div>
+
+            </div>
+        </section>
+
+    </article>
+
+</main>
+
+<!--JS-->
+<script src="./assets/js/arrow-pointer.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>
