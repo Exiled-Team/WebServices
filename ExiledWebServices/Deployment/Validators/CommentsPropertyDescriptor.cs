@@ -11,7 +11,7 @@ using YamlDotNet.Serialization;
 /// </summary>
 public sealed class CommentsPropertyDescriptor : IPropertyDescriptor
 {
-    private readonly IPropertyDescriptor baseDescriptor;
+    private readonly IPropertyDescriptor _baseDescriptor;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CommentsPropertyDescriptor"/> class.
@@ -19,7 +19,7 @@ public sealed class CommentsPropertyDescriptor : IPropertyDescriptor
     /// <param name="baseDescriptor">The base descriptor instance.</param>
     public CommentsPropertyDescriptor(IPropertyDescriptor baseDescriptor)
     {
-        this.baseDescriptor = baseDescriptor;
+        this._baseDescriptor = baseDescriptor;
         Name = baseDescriptor.Name;
     }
 
@@ -27,13 +27,13 @@ public sealed class CommentsPropertyDescriptor : IPropertyDescriptor
     public string Name { get; set; }
 
     /// <inheritdoc cref="IPropertyDescriptor"/>
-    public Type Type => baseDescriptor.Type;
+    public Type Type => _baseDescriptor.Type;
 
     /// <inheritdoc cref="IPropertyDescriptor"/>
     public Type TypeOverride
     {
-        get => baseDescriptor.TypeOverride;
-        set => baseDescriptor.TypeOverride = value;
+        get => _baseDescriptor.TypeOverride;
+        set => _baseDescriptor.TypeOverride = value;
     }
 
     /// <inheritdoc cref="IPropertyDescriptor"/>
@@ -42,29 +42,29 @@ public sealed class CommentsPropertyDescriptor : IPropertyDescriptor
     /// <inheritdoc cref="IPropertyDescriptor"/>
     public ScalarStyle ScalarStyle
     {
-        get => baseDescriptor.ScalarStyle;
-        set => baseDescriptor.ScalarStyle = value;
+        get => _baseDescriptor.ScalarStyle;
+        set => _baseDescriptor.ScalarStyle = value;
     }
 
     /// <inheritdoc cref="IPropertyDescriptor"/>
-    public bool CanWrite => baseDescriptor.CanWrite;
+    public bool CanWrite => _baseDescriptor.CanWrite;
 
     /// <inheritdoc cref="IPropertyDescriptor"/>
     public void Write(object target, object value)
     {
-        baseDescriptor.Write(target, value);
+        _baseDescriptor.Write(target, value);
     }
 
     /// <inheritdoc cref="IPropertyDescriptor"/>
     public T GetCustomAttribute<T>()
-        where T : Attribute => baseDescriptor.GetCustomAttribute<T>();
+        where T : Attribute => _baseDescriptor.GetCustomAttribute<T>();
 
     /// <inheritdoc cref="IPropertyDescriptor"/>
     public IObjectDescriptor Read(object target)
     {
-        DescriptionAttribute description = baseDescriptor.GetCustomAttribute<DescriptionAttribute>();
+        DescriptionAttribute description = _baseDescriptor.GetCustomAttribute<DescriptionAttribute>();
         return description is not null
-            ? new CommentsObjectDescriptor(baseDescriptor.Read(target), description.Description)
-            : baseDescriptor.Read(target);
+            ? new CommentsObjectDescriptor(_baseDescriptor.Read(target), description.Description)
+            : _baseDescriptor.Read(target);
     }
 }

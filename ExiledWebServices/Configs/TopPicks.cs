@@ -1,7 +1,8 @@
-using ExiledWebServices.Components.Core;
+using ExiledWebServices.Components.Cards;
+using ExiledWebServices.Components.Collections;
 using ExiledWebServices.Deployment;
 
-namespace ExiledWebServices.Components.Configs;
+namespace ExiledWebServices.Configs;
 
 /// <summary>
 /// Represents the top-picks configuration.
@@ -27,11 +28,11 @@ public class TopPicks : IConfig
     /// <summary>
     /// Gets or sets all articles that should be displayed.
     /// </summary>
-    public ListService<CoverCard> Elements { get; set; } = new()
+    public NamedList<CoverCard> Elements { get; set; } = new()
     {
         MaxDisplayableItems = 10,
-        Items = new()
-        {
+        Items =
+        [
             new CoverCard()
             {
                 Name = "Discord Integration",
@@ -43,6 +44,7 @@ public class TopPicks : IConfig
                     Subtitle = "@Exiled-Team",
                 },
             },
+
             new CoverCard()
             {
                 Name = "CedMod",
@@ -54,6 +56,7 @@ public class TopPicks : IConfig
                     Subtitle = "@ced777ric",
                 },
             },
+
             new CoverCard()
             {
                 Name = "Scripted Events",
@@ -65,6 +68,7 @@ public class TopPicks : IConfig
                     Subtitle = "@thunder300",
                 },
             },
+
             new CoverCard()
             {
                 Name = "Admin Tools",
@@ -76,6 +80,7 @@ public class TopPicks : IConfig
                     Subtitle = "@Exiled-Team",
                 },
             },
+
             new CoverCard()
             {
                 Name = "Map Editor Reborn",
@@ -87,6 +92,7 @@ public class TopPicks : IConfig
                     Subtitle = "@michal78900",
                 },
             },
+
             new CoverCard()
             {
                 Name = "Common Utilities",
@@ -98,6 +104,6 @@ public class TopPicks : IConfig
                     Subtitle = "@Exiled-Team",
                 },
             }
-        }
+        ]
     };
 }

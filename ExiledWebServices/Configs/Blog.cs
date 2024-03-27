@@ -1,6 +1,6 @@
 using ExiledWebServices.Deployment;
 
-namespace ExiledWebServices.Components.Configs;
+namespace ExiledWebServices.Configs;
 
 /// <summary>
 /// Represents the blog configuration.

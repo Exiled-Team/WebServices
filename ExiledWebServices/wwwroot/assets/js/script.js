@@ -37,3 +37,42 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+function hideSpinnerAndShowContent(delay) {
+  setTimeout(function () {
+    const overlay = document.getElementById("overlay");
+    const spinner = document.getElementById("spinner");
+    overlay.style.opacity = spinner.style.opacity = '0';
+    setTimeout(() => {
+      overlay.style.display = spinner.style.display = 'none';
+    }, 500);
+  }, delay);
+}
+
+function handleNavigationClick(event) {
+  const overlay = document.getElementById("overlay");
+  const spinner = document.getElementById("spinner");
+  overlay.style.display = spinner.style.display = 'block';
+  setTimeout(() => {
+    overlay.style.opacity = '1';
+  }, 100);
+  
+  if (event.target.href) {
+    const destinationUrl = event.target.href;
+    event.preventDefault();
+    setTimeout(() => {
+      console.log(destinationUrl);
+      window.location.href = destinationUrl;
+    }, 300);
+  } else {
+    console.error("undefined target");
+  }
+}
+
+function bindAllNavigations() {
+  document.querySelectorAll('a').forEach(link => {
+    if (link.id !== "non-bindable") {
+      link.addEventListener('click', handleNavigationClick);
+    }
+  });
+}

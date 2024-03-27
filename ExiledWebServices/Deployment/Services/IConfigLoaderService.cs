@@ -12,7 +12,7 @@ public interface IConfigLoaderService
     /// Gets a set of loaded configurations.
     /// </summary>
     List<object> LoadedConfigs { get; }
-
+    
     /// <summary>
     /// Gets the configuration object for the specified target page.
     /// </summary>

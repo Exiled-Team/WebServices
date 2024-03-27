@@ -9,7 +9,7 @@ namespace ExiledWebServices.Deployment.Validators;
 /// </summary>
 public class TypeAssigningEventEmitter : ChainedEventEmitter
 {
-    private readonly char[] multiline = new char[] { '\r', '\n', '\x85', '\x2028', '\x2029' };
+    private readonly char[] _multiline = new char[] { '\r', '\n', '\x85', '\x2028', '\x2029' };
 
     /// <inheritdoc cref="ChainedEventEmitter"/>
     public TypeAssigningEventEmitter(IEventEmitter nextEmitter)
@@ -23,7 +23,7 @@ public class TypeAssigningEventEmitter : ChainedEventEmitter
         if (eventInfo.Source.StaticType != typeof(object) && Type.GetTypeCode(eventInfo.Source.StaticType) == TypeCode.String &&
             !UnderscoredNamingConvention.Instance.Properties.Contains(eventInfo.Source.Value))
         {
-            if (eventInfo.Source.Value == null || eventInfo.Source.Value.ToString().IndexOfAny(multiline) is -1)
+            if (eventInfo.Source.Value == null || eventInfo.Source.Value.ToString().IndexOfAny(_multiline) is -1)
                 eventInfo.Style = ScalarStyle.Any;
             else
                 eventInfo.Style = ScalarStyle.Any;

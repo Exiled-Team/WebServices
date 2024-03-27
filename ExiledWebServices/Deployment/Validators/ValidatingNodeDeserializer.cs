@@ -11,7 +11,7 @@ using YamlDotNet.Serialization;
 /// </summary>
 public sealed class ValidatingNodeDeserializer : INodeDeserializer
 {
-    private readonly INodeDeserializer nodeDeserializer;
+    private readonly INodeDeserializer _nodeDeserializer;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ValidatingNodeDeserializer"/> class.
@@ -19,7 +19,7 @@ public sealed class ValidatingNodeDeserializer : INodeDeserializer
     /// <param name="nodeDeserializer">The node deserializer instance.</param>
     public ValidatingNodeDeserializer(INodeDeserializer nodeDeserializer)
     {
-        this.nodeDeserializer = nodeDeserializer;
+        this._nodeDeserializer = nodeDeserializer;
     }
 
     /// <inheritdoc cref="INodeDeserializer"/>
@@ -27,7 +27,7 @@ public sealed class ValidatingNodeDeserializer : INodeDeserializer
     {
         try
         {
-            if (nodeDeserializer.Deserialize(parser, expectedType, nestedObjectDeserializer, out value))
+            if (_nodeDeserializer.Deserialize(parser, expectedType, nestedObjectDeserializer, out value))
             {
                 Validator.ValidateObject(value, new ValidationContext(value, null, null), true);
 

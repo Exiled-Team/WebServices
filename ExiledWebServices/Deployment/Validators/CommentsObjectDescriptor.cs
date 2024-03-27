@@ -10,7 +10,7 @@ using YamlDotNet.Serialization;
 /// </summary>
 public sealed class CommentsObjectDescriptor : IObjectDescriptor
 {
-    private readonly IObjectDescriptor innerDescriptor;
+    private readonly IObjectDescriptor _innerDescriptor;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CommentsObjectDescriptor"/> class.
@@ -19,7 +19,7 @@ public sealed class CommentsObjectDescriptor : IObjectDescriptor
     /// <param name="comment">The comment to be written.</param>
     public CommentsObjectDescriptor(IObjectDescriptor innerDescriptor, string comment)
     {
-        this.innerDescriptor = innerDescriptor;
+        this._innerDescriptor = innerDescriptor;
         Comment = comment;
     }
 
@@ -29,14 +29,14 @@ public sealed class CommentsObjectDescriptor : IObjectDescriptor
     public string Comment { get; private set; }
 
     /// <inheritdoc cref="IObjectDescriptor" />
-    public object Value => innerDescriptor.Value;
+    public object Value => _innerDescriptor.Value;
 
     /// <inheritdoc cref="IObjectDescriptor" />
-    public Type Type => innerDescriptor.Type;
+    public Type Type => _innerDescriptor.Type;
 
     /// <inheritdoc cref="IObjectDescriptor" />
-    public Type StaticType => innerDescriptor.StaticType;
+    public Type StaticType => _innerDescriptor.StaticType;
 
     /// <inheritdoc cref="IObjectDescriptor" />
-    public ScalarStyle ScalarStyle => innerDescriptor.ScalarStyle;
+    public ScalarStyle ScalarStyle => _innerDescriptor.ScalarStyle;
 }

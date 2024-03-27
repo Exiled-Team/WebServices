@@ -1,0 +1,95 @@
+@page "/Article/{Name}"
+@layout DefaultLayout
+@using ExiledWebServices.Components.Services
+@using ExiledWebServices.Deployment.Services
+@using ExiledWebServices.Shared.Layouts
+@using Markdig
+@using MarkdownArticle = ExiledWebServices.Components.Markdown.MarkdownArticle
+@inject IConfigLoaderService ConfigLoader
+@inject NavigationManager NavManager
+
+@code {
+    [Parameter]
+    public string Name { get; set; }
+
+    private MarkdownArticle? MdArticle { get; set; }
+
+    private MarkupString Content { get; set; }
+
+    protected override void OnInitialized()
+    {
+        MdArticle = ArticleService.Instance.GetArticleByName(Name);
+
+        if (MdArticle is null)
+        {
+            NavManager.NavigateTo("/Error");
+            return;
+        }
+        
+        Content = new MarkupString(Markdown.ToHtml(MdArticle!.MarkdownText));
+    }
+}
+
+<AdditiveHead Title="@MdArticle!.Title" Description="@MdArticle.Title"></AdditiveHead>
+
+@{
+    ConfigLoader.LoadConfigs(Name);
+}
+
+<body>
+<div style="height: 15vh"></div>
+<section class="section">
+    <div class="container">
+        <div class="gradient hero-bg article-bg v1"></div>
+        <div class="gradient hero-bg article-bg v2"></div>
+        <div class="gradient hero-bg article-bg v3"></div>
+        <div class="grid-2-columns">
+            <div class="container contributors">
+                @foreach (KeyValuePair<string, string> author in MdArticle.Authors)
+                {
+                    string reference = string.IsNullOrEmpty(author.Value) ? $"https://github.com/{author.Key}" : author.Value;
+                    string name = $"@{author.Key}";
+                    string pfp = reference + ".png";
+
+                    <a class="hover-2" href="@reference">
+                        <img src="@pfp" alt="@name"/>
+                    </a>
+                }
+            </div>
+            <div class="flex-horizontal end flex-wrap">
+                <a class="icon-label">
+                    @if (!string.IsNullOrEmpty(MdArticle.Date))
+                    {
+                        <span>Updated on: @MdArticle.Date</span>
+                    }
+                </a>
+            </div>
+        </div>
+        <div class="divider eof"></div>
+        @Content
+        <div class="divider eof"></div>
+        @{
+            string nextArticle = string.IsNullOrEmpty(MdArticle.NextArticle) ? "#" : $"/Article/{MdArticle.NextArticle}";
+            string previousArticle = string.IsNullOrEmpty(MdArticle.PreviousArticle) ? "#" : $"/Article/{MdArticle.PreviousArticle}";
+        }
+        <div class="grid-2-columns">
+            <a class="icon-label" href="@previousArticle">
+                @if (previousArticle != "#")
+                {
+                    <ion-icon name="chevron-back"></ion-icon>
+                    <span>Previous Article</span>
+                }
+            </a>
+            <div class="flex-horizontal end flex-wrap">
+                <a class="icon-label" href="@nextArticle">
+                    @if (nextArticle != "#")
+                    {
+                        <span>Next Article</span>
+                        <ion-icon name="chevron-forward"></ion-icon>
+                    }
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+</body>

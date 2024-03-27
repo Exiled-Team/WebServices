@@ -1,0 +1,63 @@
+@using ExiledWebServices.Components.Elements
+@using ExiledWebServices.Components.Collections
+@namespace ExiledWebServices.Shared
+
+<div class="post-aside grid-list">
+
+    <div class="card aside-card">
+
+        <h3 class="headline headline-2 aside-title">
+            <span class="span">@Title</span>
+        </h3>
+
+        <ul class="additive-list">
+            @{
+                int count = 0;
+                for (int i = 0; i < Elements.Items.Count; i++)
+                {
+                    if (i >= Elements.MaxDisplayableItems)
+                        break;
+
+                    EnrichedElement item = Elements.Items[i];
+
+                    <div class="additive-card">
+                        <figure class="card-banner img-holder" style="--width: @item.Image.Width; --height: @item.Image.Height;">
+                            <img src="@item.Image.Src" width="@item.Image.Width" height="@item.Image.Height" loading="lazy" alt="@item.Title" class="img-cover">
+                        </figure>
+
+                        <div class="card-content">
+                            <h4 class="headline headline-4 card-title">
+                                <a href="@item.Link.Href" class="link hover-2">@item.Title</a>
+                            </h4>
+
+                            <div class="wrapper">
+                                <p class="card-subtitle">@item.Subtitle</p>
+                                @{
+                                    string publishDate = @item.PublishDate.ToString("d MMMM yyyy");
+                                }
+                                <time class="publish-date" datetime="@publishDate">@publishDate</time>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+        </ul>
+
+    </div>
+
+</div>
+
+@code {
+    /// <summary>
+    /// Gets or sets the card's title.
+    /// </summary>
+    [Parameter]
+    public string Title { get; set; }
+
+    /// <summary>
+    /// Gets the list's items.
+    /// </summary>
+    [Parameter]
+    public NamedList<EnrichedElement> Elements { get; set; }
+}

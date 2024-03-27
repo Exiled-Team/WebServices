@@ -31,7 +31,5 @@ class Navbar {
   }
 }
 
-// Select navigation bar and navigation toggler elements
 const navbarElements = document.querySelectorAll("[data-navbar]");
-console.log(navbarElements.length);
-const navbarInit = Array.from(navbarElements).map((navbarElement) => new Navbar(navbarElement));
+Array.from(navbarElements).map((navbarElement) => new Navbar(navbarElement));

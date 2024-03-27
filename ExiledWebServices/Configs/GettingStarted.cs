@@ -1,12 +1,12 @@
-using ExiledWebServices.Components.Core;
+using ExiledWebServices.Components.Cards;
 using ExiledWebServices.Deployment;
 
-namespace ExiledWebServices.Components.Configs;
+namespace ExiledWebServices.Configs;
 
 /// <summary>
 /// Represents the documentation configuration.
 /// </summary>
-public class GettingStarted : IArticlesConfig<DocumentationCard>
+public class GettingStarted : IArticlesConfig<ArticleCard>
 {
     public GettingStarted()
     {
@@ -37,5 +37,5 @@ public class GettingStarted : IArticlesConfig<DocumentationCard>
     public string Subtitle { get; set; } = "Begin your Exiled journey: Immerse yourself in the world of Modding and Plugin Development to uncover limitless opportunities for creativity and innovation!";
 
     /// <inheritdoc />
-    public List<DocumentationCard> Articles { get; set; } = new();
+    public List<ArticleCard> Articles { get; set; } = new();
 }

@@ -10,7 +10,7 @@ namespace ExiledWebServices.Deployment;
 /// </summary>
 public static class YamlSerializer
 {
-    private static readonly IDeserializer deserializer = new DeserializerBuilder()
+    private static readonly IDeserializer Deserializer = new DeserializerBuilder()
         .WithNamingConvention(UnderscoredNamingConvention.Instance)
         .WithNodeDeserializer(inner => new ValidatingNodeDeserializer(inner), deserializer =>
             deserializer.InsteadOf<ObjectNodeDeserializer>())
@@ -18,7 +18,7 @@ public static class YamlSerializer
         .IgnoreUnmatchedProperties()
         .Build();
 
-    private static readonly ISerializer serializer = new SerializerBuilder()
+    private static readonly ISerializer Serializer = new SerializerBuilder()
         .WithEventEmitter(eventEmitter => new TypeAssigningEventEmitter(eventEmitter))
         .WithTypeInspector(inner => new CommentGatheringTypeInspector(inner))
         .WithEmissionPhaseObjectGraphVisitor(args => new CommentsObjectGraphVisitor(args.InnerVisitor))
@@ -30,12 +30,12 @@ public static class YamlSerializer
     /// <summary>
     /// Gets the service serializer instance.
     /// </summary>
-    public static ISerializer ServiceSerializer => serializer;
+    public static ISerializer ServiceSerializer => Serializer;
 
     /// <summary>
     /// Gets the service deserializer instance.
     /// </summary>
-    public static IDeserializer ServiceDeserializer => deserializer;
+    public static IDeserializer ServiceDeserializer => Deserializer;
 
     /// <summary>
     /// Serializes the specified object to YAML format and writes it to the specified file path.

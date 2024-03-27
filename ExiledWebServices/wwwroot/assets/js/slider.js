@@ -118,4 +118,4 @@ class Slider {
 }
 
 const sliderElements = document.querySelectorAll("[data-slider]");
-const slider = Array.from(sliderElements).map((sliderElement) => new Slider(sliderElement));
+Array.from(sliderElements).map((sliderElement) => new Slider(sliderElement));

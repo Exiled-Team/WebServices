@@ -1,0 +1,17 @@
+@namespace ExiledWebServices.Shared
+
+<title>@Title</title>
+<meta name="title" content="@Title">
+<meta name="description" content="@Description">
+@ChildContent
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public string Description { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

@@ -1,0 +1,75 @@
+@using ExiledWebServices.Components.Cards
+@using ExiledWebServices.Components.Collections
+@namespace ExiledWebServices.Shared
+
+<section class="covers" aria-labelledby="cover-label">
+    <div class="container">
+
+        <div class="card cover-card">
+
+            <div class="card-content">
+
+                <h2 class="headline headline-2 section-title card-title" id="cover-label">
+                    @Title
+                </h2>
+
+                <p class="card-text">
+                    @Subtitle
+                </p>
+
+                <div class="btn-group">
+                    <button class="btn-icon" aria-label="previous" data-slider-id="top-picks">
+                        <ion-icon name="arrow-back" aria-hidden="true"></ion-icon>
+                    </button>
+
+                    <button class="btn-icon" aria-label="next" data-slider-id="top-picks">
+                        <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="slider" data-slider-id="top-picks" data-slider>
+                <ul class="slider-list" data-slider-container>
+
+                    @foreach (CoverCard item in Elements.Items)
+                    {
+                        <li class="slider-item">
+                            <a href="@item.Href" class="slider-card">
+                                <figure class="slider-banner img-holder" style="--width: @Width; --height: @Height;">
+                                    <Image Src="@item.Image.Src" Alt="@item.Image.Alt" Class="img-cover" loading="lazy"></Image>
+                                </figure>
+
+                                <div class="slider-content">
+                                    <span class="slider-title">@item.Content.Title</span>
+
+                                    <p class="slider-subtitle">@item.Content.Subtitle</p>
+                                </div>
+                            </a>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public string Subtitle { get; set; }
+
+    [Parameter]
+    public float Width { get; set; } = 700;
+
+    [Parameter]
+    public float Height { get; set; } = 500;
+
+    [Parameter]
+    public NamedList<CoverCard> Elements { get; set; }
+}

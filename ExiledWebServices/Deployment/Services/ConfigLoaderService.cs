@@ -1,8 +1,8 @@
 using System.Reflection;
-using ExiledWebServices.Deployment.Services;
+using System.Text.RegularExpressions;
 using YamlDotNet.Serialization;
 
-namespace ExiledWebServices.Deployment;
+namespace ExiledWebServices.Deployment.Services;
 
 /// <summary>
 /// Class for loading configurations.
@@ -19,24 +19,24 @@ public class ConfigLoaderService : IConfigLoaderService
     /// </summary>
     public static IDeserializer Deserializer => YamlSerializer.ServiceDeserializer;
 
-    /// <inheritdoc cref=""/>
+    /// <inheritdoc/>
     public List<object> LoadedConfigs { get; } = new();
 
-    /// <inheritdoc cref=""/>
-    public object GetConfig(string targetPage) => LoadedConfigs.FirstOrDefault(c =>
+    /// <inheritdoc/>
+    public object GetConfig(string targetPage) => LoadedConfigs.FirstOrDefault(c => 
         c is IConfig cfg && cfg.TargetPage.Equals(targetPage, StringComparison.CurrentCultureIgnoreCase));
 
-    /// <inheritdoc cref=""/>
+    /// <inheritdoc/>
     public T GetConfig<T>()
-        where T : IConfig => (T)LoadedConfigs.FirstOrDefault(c =>
+        where T : IConfig => (T)LoadedConfigs.FirstOrDefault(c => 
         c is T cfg && cfg.IsEnabled && c.GetType() == typeof(T));
 
-    /// <inheritdoc cref=""/>
+    /// <inheritdoc/>
     public T GetConfig<T>(string targetPage = "")
         where T : IConfig => (T)LoadedConfigs.FirstOrDefault(c =>
         c is T { IsEnabled: true } cfg && cfg.TargetPage.Equals(targetPage, StringComparison.CurrentCultureIgnoreCase));
 
-    /// <inheritdoc cref=""/>
+    /// <inheritdoc/>
     public void LoadConfigs(string targetPage = "")
     {
         Directory.CreateDirectory(Paths.Configs);
@@ -84,5 +84,17 @@ public class ConfigLoaderService : IConfigLoaderService
             configs.AddRange(GetConfigsFromDirectory(subDir));
 
         return configs;
+    }
+    
+    /// <summary>
+    /// Gets a page's attribute given a file path.
+    /// </summary>
+    /// <param name="filePath">The page's path.</param>
+    /// <returns>The given file path.</returns>
+    public static string GetPageAttributeValue(string filePath)
+    {
+        string fileContent = File.ReadAllText(filePath);
+        Match match = Regex.Match(fileContent, "@page \"(.+?)\"");
+        return match.Success ? match.Groups[1].Value : string.Empty;
     }
 }

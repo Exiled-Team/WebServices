@@ -12,7 +12,7 @@ using YamlDotNet.Serialization.TypeInspectors;
 /// </summary>
 public sealed class CommentGatheringTypeInspector : TypeInspectorSkeleton
 {
-    private readonly ITypeInspector innerTypeDescriptor;
+    private readonly ITypeInspector _innerTypeDescriptor;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CommentGatheringTypeInspector"/> class.
@@ -20,13 +20,13 @@ public sealed class CommentGatheringTypeInspector : TypeInspectorSkeleton
     /// <param name="innerTypeDescriptor">The inner type description instance.</param>
     public CommentGatheringTypeInspector(ITypeInspector innerTypeDescriptor)
     {
-        this.innerTypeDescriptor = innerTypeDescriptor ?? throw new ArgumentNullException("innerTypeDescriptor");
+        this._innerTypeDescriptor = innerTypeDescriptor ?? throw new ArgumentNullException("innerTypeDescriptor");
     }
 
     /// <inheritdoc/>
     public override IEnumerable<IPropertyDescriptor> GetProperties(Type type, object container)
     {
-        return innerTypeDescriptor
+        return _innerTypeDescriptor
             .GetProperties(type, container)
             .Select(descriptor => new CommentsPropertyDescriptor(descriptor));
     }

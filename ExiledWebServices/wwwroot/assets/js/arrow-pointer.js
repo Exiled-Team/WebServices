@@ -40,5 +40,5 @@ class ArrowPointer {
 }
 
 const arrowReflectors = document.querySelectorAll("[data-arrow]");
-const arrowInit = Array.from(arrowReflectors).map(arrowElement => new ArrowPointer(arrowElement));
+Array.from(arrowReflectors).map(arrowElement => new ArrowPointer(arrowElement));
 
